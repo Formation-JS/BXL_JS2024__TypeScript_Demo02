@@ -56,6 +56,14 @@ class House {
         this._desc = value;
     }
 
+    // Méthodes
+    getInformation() : string {
+        let result = `Une maison de ${this.nbRoom} pieces`;
+        if(this.hasGarden) {
+            result += ' et avec un jardin';
+        }
+        return result;
+    }
 
 }
 
@@ -63,4 +71,3 @@ class House {
 const h1 = new House(5);
 console.log(h1.desc) 
 h1.desc = "test";
-// h1.#hasGarden = false;

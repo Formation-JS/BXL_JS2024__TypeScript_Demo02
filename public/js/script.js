@@ -27,6 +27,13 @@ class House {
     set desc(value) {
         this._desc = value;
     }
+    getInformation() {
+        let result = `Une maison de ${this.nbRoom} pieces`;
+        if (this.hasGarden) {
+            result += ' et avec un jardin';
+        }
+        return result;
+    }
 }
 const h1 = new House(5);
 console.log(h1.desc);
