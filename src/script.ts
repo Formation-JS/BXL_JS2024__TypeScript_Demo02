@@ -10,6 +10,10 @@ console.log("Demo Orienté objet en TS");
 //  - Limiter l'acces via des méthodes (Getter / Setter)
 //  - Changer la visibilité des propriétés
 
+//! Heritage
+//  Créer une nouvelle classe en se basant sur une classe existante
+//  Celle-ci peut utilise toutes les props et toutes méthodes de la classe parent
+
 class House {
 
     // Déclaration des propriétés de la classe "Maison"
@@ -22,6 +26,7 @@ class House {
     constructor(nbRoom: number);
     constructor(nbRoom: number, desc: string);
     constructor(nbRoom: number, desc: string, hasGarden: boolean);
+    constructor(nbRoom: number, desc?: string, hasGarden?: boolean);
     //? ↓ L'implémentation réel du constructeur
     constructor(nbRoom: number, desc?: string, hasGarden?: boolean) {
         // La logique pour initialiser les propriétés
@@ -67,7 +72,30 @@ class House {
 
 }
 
+class BuildingHouse extends House {
+
+    // Les props
+    private _nbFloor: number;
+    private _hasLift: boolean;
+    
+    // Les constructeurs
+    //? Surchage
+    constructor(nbRoom: number, nbFloor: number);
+    constructor(nbRoom: number, nbFloor: number, desc: string);
+    constructor(nbRoom: number, nbFloor: number, desc: string, hasLift: boolean, hasGarden: boolean);
+    //? Implementation
+    constructor(nbRoom: number, nbFloor: number, desc?: string, hasLift?: boolean, hasGarden?: boolean) {
+        super(nbRoom, desc, hasGarden)
+
+        this._nbFloor = nbFloor;
+        this._hasLift = hasLift ?? false;
+    }
+
+}
 
 const h1 = new House(5);
 console.log(h1.desc) 
 h1.desc = "test";
+
+const b1 = new BuildingHouse(9, 3);
+console.log(JSON.stringify(b1));

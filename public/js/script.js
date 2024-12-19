@@ -35,6 +35,17 @@ class House {
         return result;
     }
 }
+class BuildingHouse extends House {
+    _nbFloor;
+    _hasLift;
+    constructor(nbRoom, nbFloor, desc, hasLift, hasGarden) {
+        super(nbRoom, desc, hasGarden);
+        this._nbFloor = nbFloor;
+        this._hasLift = hasLift ?? false;
+    }
+}
 const h1 = new House(5);
 console.log(h1.desc);
 h1.desc = "test";
+const b1 = new BuildingHouse(9, 3);
+console.log(JSON.stringify(b1));
