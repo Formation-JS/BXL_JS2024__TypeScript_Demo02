@@ -1,5 +1,5 @@
 "use strict";
-console.log("Demo Orienté objet en TS");
+console.warn("Demo Orienté objet en TS");
 class House {
     _desc;
     _nbRoom;

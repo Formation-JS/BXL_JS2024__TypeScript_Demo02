@@ -1,4 +1,4 @@
-console.log("Demo Orienté objet en TS");
+console.warn("Demo Orienté objet en TS");
 
 //! La programmation OO
 //  Créer des "bloc" logique qui symbolise un concepte
