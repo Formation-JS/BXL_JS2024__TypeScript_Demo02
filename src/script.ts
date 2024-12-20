@@ -14,6 +14,22 @@ console.log("Demo Orienté objet en TS");
 //  Créer une nouvelle classe en se basant sur une classe existante
 //  Celle-ci peut utilise toutes les props et toutes méthodes de la classe parent
 
+//! Polymorphisme de type
+// Une instance d'objet peut posseder plusieurs types
+// Elle est utilisable a traverse des variables de types compatibles
+/* Exemple : 
+
+   classe Vehicule { ... }
+   classe Voiture extends Vehicule { ... }
+   classe Bateau extends Vehicule { ... }
+
+   const v1 : Voiture = new Voiture(...);       //? OK
+   const v2 : Vehicule = new Voiture(...);      //? OK
+
+   const v3 : Voiture = new Bateau(...);        //! KO -> Type incompatible
+*/
+
+
 class House {
 
     // Déclaration des propriétés de la classe "Maison"
@@ -97,5 +113,5 @@ const h1 = new House(5);
 console.log(h1.desc) 
 h1.desc = "test";
 
-const b1 = new BuildingHouse(9, 3);
+const b1 : House = new BuildingHouse(9, 3, 'DigitalCity');
 console.log(JSON.stringify(b1));

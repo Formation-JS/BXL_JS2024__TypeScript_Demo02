@@ -47,5 +47,5 @@ class BuildingHouse extends House {
 const h1 = new House(5);
 console.log(h1.desc);
 h1.desc = "test";
-const b1 = new BuildingHouse(9, 3);
+const b1 = new BuildingHouse(9, 3, 'DigitalCity');
 console.log(JSON.stringify(b1));
