@@ -16,6 +16,14 @@ interface IPerson {
     eat(meal: string) : string;
 }
 
+interface IStudent extends IPerson {
+    // Propriétés
+    yearResult: number;
+    // Méthodes
+    play(game: string, nbHour?: number) : string;
+}
+
+
 class Person implements IPerson {
 
     // Props
@@ -58,6 +66,28 @@ class Person implements IPerson {
         }
 
         return `${this.fullname} mange ${meal}`;
+    }
+
+}
+
+class Student extends Person implements IStudent {
+    
+    private _yearResult: number;
+
+    constructor(firstname: string, lastname: string, yearResult: number) {
+        super(firstname, lastname);
+        this._yearResult = yearResult;
+    }
+
+    public get yearResult(): number {
+        return this._yearResult;
+    }
+    public set yearResult(value: number) {
+        this._yearResult = value;
+    }
+
+    play(game: string, nbHour?: number): string {
+        return `${this.fullname} joue à ${game} durant ${nbHour} heures !`;
     }
 
 }

@@ -32,3 +32,19 @@ class Person {
         return `${this.fullname} mange ${meal}`;
     }
 }
+class Student extends Person {
+    _yearResult;
+    constructor(firstname, lastname, yearResult) {
+        super(firstname, lastname);
+        this._yearResult = yearResult;
+    }
+    get yearResult() {
+        return this._yearResult;
+    }
+    set yearResult(value) {
+        this._yearResult = value;
+    }
+    play(game, nbHour) {
+        return `${this.fullname} joue à ${game} durant ${nbHour} heures !`;
+    }
+}
