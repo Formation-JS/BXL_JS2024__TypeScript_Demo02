@@ -53,6 +53,13 @@ class Student extends Person {
         result += `${this.firstname} suit le course...`;
         return result;
     }
+    sleep(nbHour) {
+        const nbHourPlay = Math.round(nbHour / 3);
+        let result = this.play('CS 1.6', nbHourPlay);
+        result += '\n';
+        result += super.sleep(nbHour - nbHourPlay);
+        return result;
+    }
 }
 class Prof extends Person {
     get officialName() {
@@ -79,3 +86,7 @@ class MachineAApprendre {
 }
 const p1 = new Prof('Della', 'Duck');
 const p2 = new MachineAApprendre();
+const p3 = new Prof('Balthazar', 'Picsou');
+const s1 = new Student('Zaza', 'Vanderquack', 12);
+console.log(p3.sleep(8));
+console.log(s1.sleep(8));

@@ -92,7 +92,7 @@ class Student extends Person implements IStudent {
         super(firstname, lastname);
         this._yearResult = yearResult;
     }
-
+  
     public get yearResult(): number {
         return this._yearResult;
     }
@@ -108,6 +108,16 @@ class Student extends Person implements IStudent {
         let result = prof.teach(course);
         result += '\n';
         result += `${this.firstname} suit le course...`;
+
+        return result;
+    }
+
+    override sleep(nbHour: number): string {
+        const nbHourPlay = Math.round(nbHour / 3);
+
+        let result = this.play('CS 1.6', nbHourPlay);
+        result += '\n';
+        result += super.sleep(nbHour - nbHourPlay);
 
         return result;
     }
@@ -145,3 +155,9 @@ class MachineAApprendre implements IProf {
 
 const p1 : IProf = new Prof('Della', 'Duck');
 const p2 : IProf = new MachineAApprendre(); 
+
+const p3 : IPerson = new Prof('Balthazar', 'Picsou');
+const s1 : IStudent = new Student('Zaza', 'Vanderquack', 12);
+
+console.log(p3.sleep(8));
+console.log(s1.sleep(8));
