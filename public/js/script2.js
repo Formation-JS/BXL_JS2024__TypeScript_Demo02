@@ -47,4 +47,35 @@ class Student extends Person {
     play(game, nbHour) {
         return `${this.fullname} joue à ${game} durant ${nbHour} heures !`;
     }
+    attend(prof, course) {
+        let result = prof.teach(course);
+        result += '\n';
+        result += `${this.firstname} suit le course...`;
+        return result;
+    }
 }
+class Prof extends Person {
+    get officialName() {
+        const name = `${this.firstname[0]} ${this.lastname}`;
+        return name.toUpperCase();
+    }
+    teach(course) {
+        return `${this.fullname} donne cours de ${course}`;
+    }
+    evalStudent(student, result) {
+        student.yearResult = result;
+    }
+}
+class MachineAApprendre {
+    get officialName() {
+        return 'La machine à apprendre';
+    }
+    teach(course) {
+        throw new Error('La machine donne cours...');
+    }
+    evalStudent(student, result) {
+        student.yearResult = (Math.random() > 0.5) ? result : (result / 2);
+    }
+}
+const p1 = new Prof('Della', 'Duck');
+const p2 = new MachineAApprendre();

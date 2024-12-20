@@ -6,6 +6,11 @@ console.warn("Les interfaces en TS");
 //  On peut voir l'interface comme un "contrat" que la classe passe.
 //  Celle-ci contient les signatures des élément sans l'implémenté.
 
+//? Attention : Après la transcompilation du TypeScript vers le JavaScript, 
+//?             les interfaces n'existe plus !
+//?             Il n'est donc pas possible de les utiliser pour tester le code (... instanceof ...).
+//?             Elles ne sont là que pour vous aider durant le dev !
+
 interface IPerson {
     // Propriétés
     firstname: string;
@@ -21,6 +26,15 @@ interface IStudent extends IPerson {
     yearResult: number;
     // Méthodes
     play(game: string, nbHour?: number) : string;
+    attend(prof: IProf, course: string) : string;
+}
+
+interface IProf {
+    // Propriétés
+    officialName: string;
+    // Méthodes
+    teach(course: string) : string;
+    evalStudent(student : IStudent, result: number) : void;
 }
 
 
@@ -90,4 +104,44 @@ class Student extends Person implements IStudent {
         return `${this.fullname} joue à ${game} durant ${nbHour} heures !`;
     }
 
+    attend(prof: IProf, course: string): string {
+        let result = prof.teach(course);
+        result += '\n';
+        result += `${this.firstname} suit le course...`;
+
+        return result;
+    }
 }
+
+class Prof extends Person implements IPerson, IProf {
+
+    get officialName() : string {
+        const name = `${this.firstname[0]} ${this.lastname}`;
+        return name.toUpperCase();
+    }
+
+    teach(course: string): string {
+        return `${this.fullname} donne cours de ${course}`;
+    }
+    evalStudent(student: IStudent, result: number): void {
+        student.yearResult = result;
+    }
+}
+
+class MachineAApprendre implements IProf {
+    
+    get officialName() : string {
+        return 'La machine à apprendre';
+    }
+    
+    teach(course: string): string {
+        throw new Error('La machine donne cours...');
+    }
+    evalStudent(student: IStudent, result: number): void {
+        student.yearResult = (Math.random() > 0.5) ? result : (result / 2);
+    }
+
+}
+
+const p1 : IProf = new Prof('Della', 'Duck');
+const p2 : IProf = new MachineAApprendre(); 
